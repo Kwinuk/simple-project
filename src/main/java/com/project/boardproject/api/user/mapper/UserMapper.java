@@ -13,4 +13,5 @@ public interface UserMapper {
     List<UserDTO> getUsers();
 
     UserDTO login(UserDTO user);
+
 }

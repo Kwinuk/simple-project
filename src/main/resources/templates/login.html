@@ -18,6 +18,26 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+<style>
+    @font-face {
+        font-family: 'NanumSquareNeo-Variable';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    p {
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+
+    h2 {
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+
+    a {
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+</style>
 
 <body>
 <!-- Preloader -->
@@ -33,7 +53,7 @@
 <!-- ##### Header Area Start ##### -->
 <header class="header-area">
     <!-- Navbar Area -->
-    <div id="sticky-wrapper" class="sticky-wrapper" style="height: 85px;margin-top: -20px;">
+    <div id="sticky-wrapper" class="sticky-wrapper" style="height: 85px;">
         <div class="oneMusic-main-menu">
             <div class="classy-nav-container breakpoint-off">
                 <div class="container">
@@ -60,13 +80,15 @@
                             <div class="classynav">
                                 <!-- Login/Register & Cart Button -->
                                 <div class="login-register-cart-button d-flex align-items-center">
-                                    <!-- Login/Register -->
-                                    <div class="login-register-btn mr-50">
-                                        &nbsp;
-                                        &nbsp;
-                                        <a href="/login" style="font-size: 20px;">login</a>
-                                        &nbsp;
-                                        <a href="/registerPage" style="font-size: 20px;">register</a>
+                                    <div class="login-register-btn" style="margin-right: 10px;">
+                                        <a href="/loginPage"><p
+                                                style="color : white; align-content: center; font-size: 20px; margin-top: 10px;">
+                                            로그인</p></a>
+                                    </div>
+                                    <div class="login-register-btn">
+                                        <a href="/registerPage"><p
+                                                style="color : white; align-content: center; font-size: 20px; margin-top: 10px;">
+                                            회원가입</p></a>
                                     </div>
                                 </div>
                             </div>
@@ -101,13 +123,13 @@
                     <div class="login-form">
                         <form action="/login" method="post">
                             <div class="form-group">
-                                <label for="userid">아이디</label>
-                                <input type="text" class="form-control" name="userId" id="userid"
+                                <label for="userId">아이디</label>
+                                <input type="text" class="form-control" name="userId" id="userId"
                                        aria-describedby="emailHelp" placeholder="Enter ID">
                             </div>
                             <div class="form-group">
-                                <label for="userpassword">비밀번호</label>
-                                <input type="password" class="form-control" name="userPw" id="userpassword"
+                                <label for="userPw">비밀번호</label>
+                                <input type="password" class="form-control" name="userPw" id="userPw"
                                        placeholder="Password">
                             </div>
                             <button type="submit" class="btn oneMusic-btn mt-30">로그인</button>

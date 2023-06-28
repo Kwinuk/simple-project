@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
     @Autowired
@@ -16,14 +20,15 @@ public class UserController {
      * @return
      */
     @GetMapping("/index")
-    public String register() {
+    public String index() {
         return "index";
     }
 
     @GetMapping("registerPage")
-    public String registerPage(){
+    public String registerPage() {
         return "register";
     }
+
     /**
      * @param user
      * @return
@@ -55,9 +60,23 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserDTO user, Model model) {
-        model.addAttribute("userInfo",userService.login(user));
-        System.out.printf("userName" + model.getAttribute(user.getUserName()));
+    public String login(UserDTO user, Model model, HttpServletRequest request) {
+        model.addAttribute("userInfo", userService.login(user));
+        HttpSession session = request.getSession();
         return "index";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "index";
+    }
+
+    @PostMapping("/myPage")
+    public String myPage(UserDTO user, Model model) {
+        model.addAttribute("userInfo", userService.login(user));
+        return "mypage";
+    }
+
 }
