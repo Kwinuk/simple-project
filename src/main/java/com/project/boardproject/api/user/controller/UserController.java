@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api")
 @Controller
 public class UserController {
     @Autowired
@@ -21,20 +20,19 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("registerPage")
+    public String registerPage(){
+        return "register";
+    }
     /**
      * @param user
-     * @param model
      * @return
      */
     @PostMapping("/register")
-    public String insertUser(UserDTO user, Model model) {
-        String txt = "";
+    public String register(UserDTO user) {
         try {
-            txt = "********** insertUser SUCCESS **********";
-            System.out.println(txt);
-            userService.insertUser(user);
-            model.addAttribute("userlist", userService.getUsers());
-            return "userlist";
+            userService.register(user);
+            return "index";
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,12 +45,19 @@ public class UserController {
      */
     @GetMapping("/userlist")
     public String getUsers(Model model) {
-        model.addAttribute("userlist", userService.getUsers());
-        return "userlist";
+        model.addAttribute("users", userService.getUsers());
+        return "index";
     }
-    @GetMapping("/login")
-    public String getUserById(UserDTO user, Model model) {
-        model.addAttribute(userService.getUserById(user));
-        return "userlist";
+
+    @GetMapping("/loginPage")
+    public String loginPage() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(UserDTO user, Model model) {
+        model.addAttribute("userInfo",userService.login(user));
+        System.out.printf("userName" + model.getAttribute(user.getUserName()));
+        return "index";
     }
 }

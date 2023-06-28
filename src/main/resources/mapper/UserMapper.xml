@@ -2,7 +2,7 @@
 
 <mapper namespace="com.project.boardproject.api.user.mapper.UserMapper">
 
-    <insert id="insertUser" parameterType="com.project.boardproject.api.user.model.UserDTO">
+    <insert id="register" parameterType="com.project.boardproject.api.user.model.UserDTO">
             INSERT INTO
                 USER
                     (user_id, user_pw, user_name, address, phone_num)
@@ -14,8 +14,8 @@
         SELECT * FROM USER
     </select>
 
-    <select id="getUserById" parameterType="int" resultType="com.project.boardproject.api.user.model.UserDTO">
-        SELECT * FROM USER WHERE user_num = #{userNum}
+    <select id="login" parameterType="String" resultType="com.project.boardproject.api.user.model.UserDTO">
+        SELECT * FROM USER WHERE user_id = #{userId}
     </select>
 
     <!--    <resultMap id="userlist" type="UserDTO">-->

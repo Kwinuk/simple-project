@@ -17,16 +17,16 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public void insertUser(UserDTO user) {
-        userMapper.insertUser(user);
+    public void register(UserDTO user) {
+        userMapper.register(user);
     }
 
     public List<UserDTO> getUsers() {
         return userMapper.getUsers();
     }
 
-    public UserDTO getUserById(UserDTO user) {
-        return userMapper.getUserById(user);
+    public UserDTO login(UserDTO user) {
+        return userMapper.login(user);
     }
 
 }

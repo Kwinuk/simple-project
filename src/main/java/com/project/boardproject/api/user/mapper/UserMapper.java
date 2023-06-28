@@ -8,9 +8,9 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    void insertUser(UserDTO user);
+    void register(UserDTO user);
 
     List<UserDTO> getUsers();
 
-    UserDTO getUserById(UserDTO user);
+    UserDTO login(UserDTO user);
 }
