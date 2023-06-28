@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>회원가입</title>
 </head>
 <body>
-
+<div style="display: block; width: auto; height: 20px; margin: 0 auto; text-align: center;">
+    <p style="font-size: xx-large; font-style: normal">회원가입 페이지</p>
+</div>
+<div>
+    <div style="display: block; width: 200px; height: 200px; margin: 0 auto; margin-top: 350px; text-align: center;">
+        <form action="/api/user" method="Post">
+            ID: <input type="text" name="userId"><br>
+            PW: <input type="text" name="userPw"><br>
+            NAME: <input type="text" name="userName"><br>
+            ADDR: <input type="text" name="address"><br>
+            H.P: <input type="text" name="phoneNum"><br>
+            <button type="submit">회원가입</button>
+        </form>
+        <a href="/api/userlist">회원목록</a>
+    </div>
+</div>
 </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 </html>
