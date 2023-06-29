@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@SessionAttributes("userInfo")
 public class UserController {
     @Autowired
     UserService userService;
@@ -21,6 +21,7 @@ public class UserController {
      */
     @GetMapping("/index")
     public String index() {
+
         return "index";
     }
 
@@ -60,9 +61,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserDTO user, Model model, HttpServletRequest request) {
-        model.addAttribute("userInfo", userService.login(user));
+    public String login(Model model, UserDTO user, HttpServletRequest request) {
+        // 세션에 요청 값 저장
         HttpSession session = request.getSession();
+        UserDTO userInfo = userService.login(user);
+        // view에 보여줄 객체
+        model.addAttribute("userInfo", userInfo);
+        // 세션에 로그인 정보 저장
+        session.setAttribute("userInfo", userInfo);
+
+        System.out.println(session.getAttribute("userInfo"));
+
         return "index";
     }
 
@@ -71,12 +80,6 @@ public class UserController {
         HttpSession session = request.getSession();
         session.invalidate();
         return "index";
-    }
-
-    @PostMapping("/myPage")
-    public String myPage(UserDTO user, Model model) {
-        model.addAttribute("userInfo", userService.login(user));
-        return "mypage";
     }
 
 }

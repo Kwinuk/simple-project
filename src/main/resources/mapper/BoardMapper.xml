@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.boardproject.api.board.mapper.BoardMapper">
+
+    <insert id="writeBoard" parameterType="com.project.boardproject.api.board.model.BoardDTO">
+        INSERT INTO
+            BOARD
+            (title, content, writer, write_date, view_cnt)
+        VALUES
+            (#{title}, #{content}, #{writer}, #{writeDate}, #{viewCnt})
+    </insert>
+
+    <select id="boardList" resultType="com.project.boardproject.api.board.model.BoardDTO">
+        SELECT * FROM BOARD
+    </select>
+
+    <select id="boardDeteil" parameterType="int" resultType="com.project.boardproject.api.board.model.BoardDTO">
+        SELECT * FROM BOARD WHERE bid = #{bId}
+    </select>
+
+    <!--    <resultMap id="boardlist" type="BoardDTO">-->
+    <!--        <result property="boardNum" column="board_num"/>-->
+    <!--        <result property="boardId" column="board_id"/>-->
+    <!--        <result property="boardPw" column="board_pw"/>-->
+    <!--        <result property="boardName" column="board_name"/>-->
+    <!--        <result property="role" column="board_role"/>-->
+    <!--        <result property="address" column="address"/>-->
+    <!--        <result property="phoneNum" column="phone_num"/>-->
+    <!--    </resultMap>-->
+
+
+</mapper>
