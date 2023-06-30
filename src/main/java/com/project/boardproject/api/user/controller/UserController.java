@@ -1,5 +1,6 @@
 package com.project.boardproject.api.user.controller;
 
+import com.project.boardproject.api.board.service.BoardService;
 import com.project.boardproject.api.user.model.UserDTO;
 import com.project.boardproject.api.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,21 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    BoardService boardService;
 
     /**
      * @return
      */
     @GetMapping("/index")
-    public String index() {
-
+    public String index(Model model) {
+        model.addAttribute("boardList", boardService.boardList());
         return "index";
     }
 
     @GetMapping("registerPage")
     public String registerPage() {
+
         return "register";
     }
 
@@ -35,9 +39,10 @@ public class UserController {
      * @return
      */
     @PostMapping("/register")
-    public String register(UserDTO user) {
+    public String register(UserDTO user, Model model) {
         try {
             userService.register(user);
+            model.addAttribute("boardList", boardService.boardList());
             return "index";
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,14 +66,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(Model model, UserDTO user, HttpServletRequest request) {
+    public String login(UserDTO user, HttpServletRequest request, Model model) {
         // 세션에 요청 값 저장
         HttpSession session = request.getSession();
         UserDTO userInfo = userService.login(user);
-        // view에 보여줄 객체
-        model.addAttribute("userInfo", userInfo);
         // 세션에 로그인 정보 저장
         session.setAttribute("userInfo", userInfo);
+        model.addAttribute("boardList", boardService.boardList());
 
         System.out.println(session.getAttribute("userInfo"));
 

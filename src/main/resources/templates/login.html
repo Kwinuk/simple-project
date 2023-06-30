@@ -79,21 +79,37 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <!-- Login/Register & Cart Button -->
-                                <div class="login-register-cart-button d-flex align-items-center">
-                                    <div class="login-register-btn" style="margin-right: 10px;">
-                                        <a href="/loginPage"><p
-                                                style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                                            로그인</p></a>
+                                <th:block th:if="${userInfo != null}">
+                                    <div class="login-register-cart-button d-flex align-items-center" style="margin-top: 40px;">
+                                        <div class="login-register-btn" style="margin-top: 50px;">
+                                            <a href="/myPage" style="transform: translateY(7%);"><p
+                                                    style="color : black; align-content: center; font-size: 12px; font-weight : bold; margin-top: 10px;">
+                                                마이페이지</p></a>
+                                            <a href="/logout" style="transform: translateY(7%); margin-right: 4px"><p
+                                                    style="color : black; align-content: center; font-size: 12px; font-weight : bold; margin-top: 10px;">
+                                                로그아웃</p></a>
+                                            <!--                                            <a href="/myPage"><p-->
+                                            <!--                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;"-->
+                                            <!--                                                    th:text="${userInfo.userName + ' 님'}"></p></a>-->
+                                        </div>
                                     </div>
-                                    <div class="login-register-btn">
-                                        <a href="/registerPage"><p
-                                                style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                                            회원가입</p></a>
+                                </th:block>
+                                <th:block th:if="${userInfo == null}">
+                                    <div class="login-register-cart-button d-flex align-items-center" style="margin-top: 40px;">
+                                        <div class="login-register-btn" style="margin-right: 10px;">
+                                            <a href="/loginPage"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
+                                                로그인</p></a>
+                                        </div>
+                                        <div class="login-register-btn">
+                                            <a href="/registerPage"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
+                                                회원가입</p></a>
+                                        </div>
                                     </div>
-                                </div>
+                                </th:block>
                             </div>
                             <!-- Nav End -->
-
                         </div>
                     </nav>
                 </div>
@@ -107,7 +123,7 @@
 <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
     <div class="bradcumbContent">
         <p></p>
-        <h2>LOGIN</h2>
+        <h2>로그인</h2>
     </div>
 </section>
 <!-- ##### Breadcumb Area End ##### -->
@@ -118,7 +134,6 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
                 <div class="login-content">
-                    <h3>환영합니다.</h3>
                     <!-- Login Form -->
                     <div class="login-form">
                         <form action="/login" method="post">

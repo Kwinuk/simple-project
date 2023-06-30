@@ -1,6 +1,7 @@
 package com.project.boardproject.api.board.controller;
 
 import com.project.boardproject.api.board.model.BoardDTO;
+import com.project.boardproject.api.board.model.Criteria;
 import com.project.boardproject.api.board.service.BoardService;
 import com.project.boardproject.api.user.model.UserDTO;
 import com.project.boardproject.api.user.service.UserService;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpRequest;
 
 @Controller
 public class BoardController {
@@ -23,26 +22,34 @@ public class BoardController {
     UserService userService;
 
     @GetMapping("writeBoardPage")
-    public String writeBoardPage(HttpSession session) {
+    public String writeBoardPage(HttpServletRequest request) {
+        HttpSession session = request.getSession();
         System.out.println(session.getAttribute("userInfo"));
+        session.getAttribute("userInfo");
         return "writeboard";
     }
 
     @PostMapping("writeBoard")
-    public String writeBoard(BoardDTO board, Model model) {
+    public String writeBoard(HttpServletRequest request, BoardDTO board, Model model) {
+        HttpSession session = request.getSession();
+        UserDTO userDTO = (UserDTO) session.getAttribute("userInfo");
+        board.setWriter(userDTO.getNickName());
+        board.setUId(userDTO.getUId());
         boardService.writeBoard(board);
-        model.addAttribute("boardList", boardService.boardList());
+        model.addAttribute("boardList", boardService.boardList(new Criteria()));
         return "index";
     }
 
     @GetMapping("boardList")
     public String boardList(Model model) {
-        model.addAttribute("boardList", boardService.boardList());
+        model.addAttribute("boardList", boardService.boardList(new Criteria()));
         return "index";
     }
 
     @PostMapping("boardDetail")
     public String boardDetail(BoardDTO board, Model model) {
+        int bId = board.getBId();
+        board.setBId(bId);
         model.addAttribute("boardInfo", boardService.boardDetail(board));
         return "boardDetail";
     }

@@ -4,29 +4,42 @@
 
     <insert id="writeBoard" parameterType="com.project.boardproject.api.board.model.BoardDTO">
         INSERT INTO
-            BOARD
-            (title, content, writer, write_date, view_cnt)
+            board
+            (uid, title, content, writer, write_date)
         VALUES
-            (#{title}, #{content}, #{writer}, #{writeDate}, #{viewCnt})
+            (#{uId}, #{title}, #{content}, #{writer}, NOW())
     </insert>
 
     <select id="boardList" resultType="com.project.boardproject.api.board.model.BoardDTO">
-        SELECT * FROM BOARD
+        SELECT
+            title as title,
+            writer as writer,
+            write_date as writeDate,
+            view_cnt as viewCnt
+        FROM
+            (
+            SELECT
+                bid, title, content, writer, writeDate, viewCnt
+            FROM
+                board
+            WHERE
+                @ROWNUM <= #{pageNum} * #{amount}
+            )
+       WHERE
+             ROWNUM > (#{pageNum}-1) * #{amount}
+        AND
+           bid = bid
+
     </select>
 
     <select id="boardDeteil" parameterType="int" resultType="com.project.boardproject.api.board.model.BoardDTO">
-        SELECT * FROM BOARD WHERE bid = #{bId}
+        SELECT
+            bid, title, content, writer, view_cnt, write_date
+        FROM
+            board b INNER JOIN user u ON b.uid = u.uid
+        WHERE
+            b.bid = 4;
     </select>
-
-    <!--    <resultMap id="boardlist" type="BoardDTO">-->
-    <!--        <result property="boardNum" column="board_num"/>-->
-    <!--        <result property="boardId" column="board_id"/>-->
-    <!--        <result property="boardPw" column="board_pw"/>-->
-    <!--        <result property="boardName" column="board_name"/>-->
-    <!--        <result property="role" column="board_role"/>-->
-    <!--        <result property="address" column="address"/>-->
-    <!--        <result property="phoneNum" column="phone_num"/>-->
-    <!--    </resultMap>-->
 
 
 </mapper>

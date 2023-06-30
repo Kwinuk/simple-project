@@ -5,9 +5,9 @@
     <insert id="register" parameterType="com.project.boardproject.api.user.model.UserDTO">
             INSERT INTO
                 USER
-                    (user_id, user_pw, user_name, address, phone_num)
+                    (user_id, user_pw, user_name, nick_name, address, phone_num)
                 VALUES
-                    (#{userId}, #{userPw}, #{userName}, #{address}, #{phoneNum})
+                    (#{userId}, #{userPw}, #{userName}, #{nickName}, #{address}, #{phoneNum})
     </insert>
 
     <select id="getUsers" resultType="com.project.boardproject.api.user.model.UserDTO">

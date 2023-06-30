@@ -491,7 +491,8 @@ img {
     left: 0;
     z-index: 9999;
     background-color: #f5f9fa;
-    box-shadow: 0 5px 50px 15px rgba(0, 0, 0, 0.2); }
+    /*box-shadow: 0 5px 50px 15px rgba(0, 0, 0, 0.2); */
+  }
     @media only screen and (max-width: 767px) {
       .header-area .is-sticky .oneMusic-main-menu {
         height: 70px; } }
