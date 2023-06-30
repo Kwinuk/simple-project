@@ -1,5 +1,6 @@
 package com.project.boardproject.api.user.controller;
 
+import com.project.boardproject.api.board.model.Criteria;
 import com.project.boardproject.api.board.service.BoardService;
 import com.project.boardproject.api.user.model.UserDTO;
 import com.project.boardproject.api.user.service.UserService;
@@ -23,7 +24,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/index")
-    public String index(Model model) {
+    public String index(Model model ) {
         model.addAttribute("boardList", boardService.boardList());
         return "index";
     }
@@ -66,7 +67,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserDTO user, HttpServletRequest request, Model model) {
+    public String login(UserDTO user, HttpServletRequest request, Model model ) {
         // 세션에 요청 값 저장
         HttpSession session = request.getSession();
         UserDTO userInfo = userService.login(user);

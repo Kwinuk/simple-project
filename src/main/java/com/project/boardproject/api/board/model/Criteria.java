@@ -4,8 +4,6 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
-
 @Component
 @Data
 public class Criteria {

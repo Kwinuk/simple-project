@@ -4,42 +4,62 @@
 
     <insert id="writeBoard" parameterType="com.project.boardproject.api.board.model.BoardDTO">
         INSERT INTO
-            board
-            (uid, title, content, writer, write_date)
+        board
+        (uid, title, content, writer, write_date)
         VALUES
-            (#{uId}, #{title}, #{content}, #{writer}, NOW())
+        (#{uId}, #{title}, #{content}, #{writer}, NOW())
     </insert>
 
+    <!--suppress SqlResolve -->
     <select id="boardList" resultType="com.project.boardproject.api.board.model.BoardDTO">
-        SELECT
-            title as title,
-            writer as writer,
-            write_date as writeDate,
-            view_cnt as viewCnt
-        FROM
-            (
-            SELECT
-                bid, title, content, writer, writeDate, viewCnt
-            FROM
-                board
-            WHERE
-                @ROWNUM <= #{pageNum} * #{amount}
-            )
-       WHERE
-             ROWNUM > (#{pageNum}-1) * #{amount}
-        AND
-           bid = bid
+<!--                SELECT-->
+<!--                    title, content, writer, write_date, view_cnt-->
+<!--                FROM-->
+<!--                    (SELECT-->
+<!--                         title, content, writer, write_date, view_cnt, ROW_NUMBER() OVER (ORDER BY bid ASC) AS rownum-->
+<!--                    FROM-->
+<!--                        board-->
+<!--                    WHERE-->
+<!--                        rownum <= #{pageNum} * #{amount}-->
+<!--                ) AS subquery-->
+<!--                WHERE-->
+<!--                    rownum > (#{pageNum}-1) * #{amount}-->
 
+            SELECT * FROM BOARD
     </select>
 
-    <select id="boardDeteil" parameterType="int" resultType="com.project.boardproject.api.board.model.BoardDTO">
+    <select id="boardDetail" parameterType="int" resultType="com.project.boardproject.api.board.model.BoardDTO">
         SELECT
             bid, title, content, writer, view_cnt, write_date
         FROM
             board b INNER JOIN user u ON b.uid = u.uid
         WHERE
-            b.bid = 4;
+             b.bid = #{bId};
     </select>
 
+    <sql id="search">
+        <if test="condition == 'title'">
+            WHERE title LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="condition == 'content'">
+            WHERE content LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="condition == 'writer'">
+            WHERE writer LIKE CONCAT('%',#{keyword},'%')
+        </if>
+    </sql>
 
+    <!-- 토탈 -->
+    <select id="getTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM board
+        <include refid="search" />
+    </select>
+
+    <select id="getFreeBoard" resultType="com.project.boardproject.api.board.model.BoardDTO">
+        select * from board
+        <include refid="search" />
+        order by bid desc
+        limit #{pageNum},  #{countPerPage}
+    </select>
 </mapper>
