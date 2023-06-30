@@ -1,6 +1,8 @@
 package com.project.boardproject.api.user.controller;
 
 import com.project.boardproject.api.board.model.Criteria;
+import com.project.boardproject.api.board.model.PageCreate;
+import com.project.boardproject.api.board.model.PageVO;
 import com.project.boardproject.api.board.service.BoardService;
 import com.project.boardproject.api.user.model.UserDTO;
 import com.project.boardproject.api.user.service.UserService;
@@ -24,8 +26,17 @@ public class UserController {
      * @return
      */
     @GetMapping("/index")
-    public String index(Model model ) {
+    public String index(Model model, PageVO vo) {
         model.addAttribute("boardList", boardService.boardList());
+        PageCreate pc = new PageCreate();
+        pc.setPaging(vo);
+        pc.setArticleTotalCount(boardService.getTotal(vo));
+
+        System.out.println(pc);
+
+        model.addAttribute("freeList", boardService.getFreeBoard(vo));
+        model.addAttribute("pc", pc);
+
         return "index";
     }
 
@@ -67,13 +78,21 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserDTO user, HttpServletRequest request, Model model ) {
+    public String login(UserDTO user, HttpServletRequest request, Model model, PageVO vo) {
         // 세션에 요청 값 저장
         HttpSession session = request.getSession();
         UserDTO userInfo = userService.login(user);
         // 세션에 로그인 정보 저장
         session.setAttribute("userInfo", userInfo);
-        model.addAttribute("boardList", boardService.boardList());
+        PageCreate pc = new PageCreate();
+        pc.setPaging(vo);
+        pc.setArticleTotalCount(boardService.getTotal(vo));
+
+        System.out.println(pc);
+
+        model.addAttribute("freeList", boardService.getFreeBoard(vo));
+        model.addAttribute("pc", pc);
+
 
         System.out.println(session.getAttribute("userInfo"));
 
@@ -81,9 +100,18 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public String logout(HttpServletRequest request, PageVO vo, Model model) {
         HttpSession session = request.getSession();
+        PageCreate pc = new PageCreate();
+        pc.setPaging(vo);
+        pc.setArticleTotalCount(boardService.getTotal(vo));
+
+        System.out.println(pc);
+
+        model.addAttribute("freeList", boardService.getFreeBoard(vo));
+        model.addAttribute("pc", pc);
         session.invalidate();
+
         return "index";
     }
 

@@ -32,13 +32,22 @@ public class BoardController {
     }
 
     @PostMapping("writeBoard")
-    public String writeBoard(HttpServletRequest request, BoardDTO board, Model model) {
+    public String writeBoard(HttpServletRequest request, BoardDTO board, Model model, PageVO vo) {
         HttpSession session = request.getSession();
         UserDTO userDTO = (UserDTO) session.getAttribute("userInfo");
         board.setWriter(userDTO.getNickName());
         board.setUId(userDTO.getUId());
         boardService.writeBoard(board);
         model.addAttribute("boardList", boardService.boardList());
+        PageCreate pc = new PageCreate();
+        pc.setPaging(vo);
+        pc.setArticleTotalCount(boardService.getTotal(vo));
+
+        System.out.println(pc);
+
+        model.addAttribute("freeList", boardService.getFreeBoard(vo));
+        model.addAttribute("pc", pc);
+
         return "index";
     }
 

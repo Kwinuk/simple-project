@@ -83,7 +83,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
                         <!-- Nav brand -->
-                        <a href="/index" class="nav-brand"><img src="img/core-img/xcurenetlogo.png" alt=""></a>
+                        <a href="/index" class="nav-brand" style="margin-top: 30px"><img src="img/core-img/xcurenetlogo.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -191,10 +191,9 @@
         <div style="width: 1110px; justify-content: center;  margin: 0px auto;">
             <section class="oneMusic-buy-now-area has-fluid bg-gray section-padding-100">
                 <div class="container-fluid">
-                    <div class="row" style="margin-bottom: -30px;">
+                    <div class="row" style="margin-bottom: -90px;">
                         <div class="col-12" style="height: 200px;">
                             <div class="section-heading style-2">
-                                <p>Xcurenet Community</p>
                                 <h2>게시글 목록
                                 </h2>
                                 <a href="/writeBoardPage"><p
@@ -255,6 +254,8 @@
                         </table>
                     </div>
                     <br>
+                    <br>
+                    <br>
                     <!--                    <form action="/freeList">-->
                     <!--                        <div class="search-wrap clearfix">-->
                     <!--                            <button type="submit" class="btn btn-primary search-btn" style="margin-right: 24%;">검색</button>-->
@@ -275,15 +276,15 @@
                             <div class="text-center clearfix" style="position: relative;">
                                 <ul class="pagination" id="pagination" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
                                     <span th:if="${pc.prev}">
-                                        <li class="page-item"><a class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${pc.beginPage - 1}" th:text="${pc.beginPage - 1}"></a></li>
+                                        <li class="page-item"><a style="height: 50px;" class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${pc.beginPage - 1}"><p th:text="${pc.beginPage - 1}"></p></a></li>
                                     </span>
                                     <th:block th:each="num : ${#numbers.sequence(pc.beginPage, pc.endPage)}">
                                         <li th:classappend="${pc.paging.pageNum == num} ? 'page-item active' : 'page-item'">
-                                            <a class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${num}" th:text="${num}"></a>
+                                            <a style="height: 50px;" class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${num}"><p th:text="${num}"></p></a>
                                         </li>
                                     </th:block>
                                     <span th:if="${pc.next}">
-                                        <li class="page-item"><a class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${pc.endPage + 1}"th:text="${pc.endPage + 1}"></a></li>
+                                        <li class="page-item"><a style="height: 50px;" class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${pc.endPage + 1}"><p th:text="${pc.endPage + 1}"></p></a></li>
                                     </span>
                                 </ul>
 
@@ -296,17 +297,17 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Pagination -->
-                    <div class="oneMusic-pagination-area wow fadeInUp" data-wow-delay="300ms">
-                        <ul class="pagination" style="text-align: center">
-                            <li style="display: inline-block" class="page-item active"><a class="page-link"
-                                                                                          href="#">01</a></li>
-                            <li style="display: inline-block" class="page-item"><a class="page-link" href="#">02</a>
-                            </li>
-                            <li style="display: inline-block" class="page-item"><a class="page-link" href="#">03</a>
-                            </li>
-                        </ul>
-                    </div>
+<!--                    &lt;!&ndash; Pagination &ndash;&gt;-->
+<!--                    <div class="oneMusic-pagination-area wow fadeInUp" data-wow-delay="300ms">-->
+<!--                        <ul class="pagination" style="text-align: center">-->
+<!--                            <li style="display: inline-block" class="page-item active"><a class="page-link"-->
+<!--                                                                                          href="#">01</a></li>-->
+<!--                            <li style="display: inline-block" class="page-item"><a class="page-link" href="#">02</a>-->
+<!--                            </li>-->
+<!--                            <li style="display: inline-block" class="page-item"><a class="page-link" href="#">03</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
 
                 </div>
             </section>
