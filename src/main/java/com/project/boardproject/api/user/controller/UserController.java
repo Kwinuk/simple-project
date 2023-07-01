@@ -46,15 +46,33 @@ public class UserController {
         return "register";
     }
 
+    @PostMapping("/checkId")
+    @ResponseBody
+    public String checkId(UserDTO user) {
+        if(userService.checkId(user) == null) {
+            System.out.println("중복되지 않음");
+            return "1";
+        }
+        return "2";
+    }
+
     /**
      * @param user
      * @return
      */
     @PostMapping("/register")
-    public String register(UserDTO user, Model model) {
+    public String register(UserDTO user, Model model, PageVO vo) {
         try {
             userService.register(user);
-            model.addAttribute("boardList", boardService.boardList());
+//            model.addAttribute("boardList", boardService.boardList());
+            PageCreate pc = new PageCreate();
+            pc.setPaging(vo);
+            pc.setArticleTotalCount(boardService.getTotal(vo));
+
+            System.out.println(pc);
+
+            model.addAttribute("freeList", boardService.getFreeBoard(vo));
+            model.addAttribute("pc", pc);
             return "index";
         } catch (Exception e) {
             e.printStackTrace();

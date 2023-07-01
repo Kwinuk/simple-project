@@ -15,7 +15,12 @@
     </select>
 
     <select id="login" parameterType="String" resultType="com.project.boardproject.api.user.model.UserDTO">
-        SELECT * FROM USER WHERE user_id = #{userId}
+        SELECT * FROM USER WHERE user_id = #{userId} AND user_pw = #{userPw}
+    </select>
+
+    <select id="checkId" parameterType="String" resultType="com.project.boardproject.api.user.model.UserDTO">
+        SELECT user_id FROM USER WHERE user_id = #{userId}
+
     </select>
 
     <!--    <resultMap id="userlist" type="UserDTO">-->

@@ -7,6 +7,7 @@ public class UserDTO {
     private int uId;
     private String userId;
     private String userPw;
+    private String userRePw;
     private String userName;
     private String nickName;
     private String address;

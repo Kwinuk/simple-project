@@ -14,4 +14,5 @@ public interface UserMapper {
 
     UserDTO login(UserDTO user);
 
+    UserDTO checkId(UserDTO user);
 }
