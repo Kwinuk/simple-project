@@ -1,8 +1,7 @@
 package com.project.boardproject.api.board.mapper;
 
 import com.project.boardproject.api.board.model.BoardDTO;
-import com.project.boardproject.api.board.model.Criteria;
-import com.project.boardproject.api.board.model.PageVO;
+import com.project.boardproject.api.board.model.PaginationVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface BoardMapper {
 
     BoardDTO boardDetail(BoardDTO board);
 
-    int getTotal(PageVO pageVO);
+    int getCount();
 
-    List<BoardDTO> getFreeBoard(PageVO pageVO);
+    List<BoardDTO> getListPage(PaginationVO paginationVO);
 }

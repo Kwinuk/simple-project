@@ -83,7 +83,8 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
                         <!-- Nav brand -->
-                        <a href="/index" class="nav-brand" style="margin-top: 30px"><img src="img/core-img/xcurenetlogo.png" alt=""></a>
+                        <a href="/index" class="nav-brand" style="margin-top: 30px"><img
+                                src="img/core-img/xcurenetlogo.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -150,17 +151,6 @@
                                     style="color: white; font-size: 20px;">인기글</p></a></li>
                             <li style="margin-right: 30px;"><a href="/newest"><p style="color: white; font-size: 20px;">
                                 최신글</p></a></li>
-<!--                            <li onmouseover="showCategories();" onmouseout="hideCategories();"-->
-<!--                                style="margin-right: 30px;">-->
-<!--                                <p style="color: white; font-size: 20px;">카테고리</p>-->
-<!--                                <ul id="categoriesDropdown" style="display: none;">-->
-<!--                                    <li><a href="/category1"><p style="color: white; font-size: 20px">Category 1</p></a>-->
-<!--                                    </li>-->
-<!--                                    <li><a href="/category2"><p style="color: white; font-size: 20px">Category 2</p></a>-->
-<!--                                    </li>-->
-<!--                                    <li><a href="/category3"><p style="color: white; font-size: 20px">Category 3</p></a>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
                             </li>
                         </ul>
 
@@ -196,38 +186,13 @@
                             <div class="section-heading style-2">
                                 <h2>게시글 목록
                                 </h2>
-                                <a href="/writeBoardPage">
-                                    <th t
-                                    <p style="text-align: right; margin-top: 20px; font-size: 20px; font-weight: bold">게시글작성</p>
+                                <a href="/writeBoardPage" id="writeBoardPage" onclick="writeBoardPage()">
+                                    <p style="text-align: right; margin-top: 20px; font-size: 20px; font-weight: bold">
+                                        게시글작성</p>
                                 </a>
                             </div>
                         </div>
                     </div>
-
-                    <!--                    <table class="table" style="width: 70%; margin: 0 auto;">-->
-                    <!--                        <thead>-->
-                    <!--                        <tr>-->
-                    <!--                            <th scope="col">#</th>-->
-                    <!--                            <th scope="col">제목</th>-->
-                    <!--                            <th scope="col">작성자</th>-->
-                    <!--                            <th scope="col">작성 시간</th>-->
-                    <!--                            <th scope="col">조회수</th>-->
-                    <!--                        </tr>-->
-                    <!--                        </thead>-->
-                    <!--                        <tbody>-->
-                    <!--                        <-->
-                    <!--                        <c:forEach var="vo" items="${freeList}">-->
-                    <!--                            <tr>-->
-                    <!--                                <th scope="row">${vo.freeboard_no}</th>-->
-                    <!--                                <td><a href="boardDetail?bid=${vo.freeboard_no}'/>">${vo.freeboard_title}</a></td>-->
-                    <!--                                <td>${vo.freeboard_writer}</td>-->
-                    <!--                                <td>${vo.freeboard_regDate}</td>-->
-                    <!--                                <td>${vo.freeboard_hit}</td>-->
-                    <!--                            </tr>-->
-                    <!--                        </c:forEach>-->
-                    <!--                        </tbody>-->
-                    <!--                    </table>-->
-
 
                     <div class="row">
                         <table style="text-align: center; margin-left: auto; margin-right: auto;">
@@ -241,14 +206,15 @@
                             </tr>
                             </thead>
                             <tbody style="border: 1px solid black;">
-                            <tr th:each="board : ${freeList}" style="border: 1px solid black;">
+                            <tr th:each="board : ${boardList}" style="border: 1px solid black;">
                                 <td style="width: 150px; font-size: 20px;" th:text="${board.getBId()}"></td>
                                 <td style="width: 150px; font-size: 20px;" th:text="${board.getWriter()}"></td>
-                                <a href="/boardDetail">
-                                    <td style="width: 150px; font-size: 20px;" th:text="${board.getTitle()}"></td>
-                                </a>
-                                <td style="width: 150px; font-size: 20px;" th:text="${board.getWriteDate()}">
-                                <td style="width: 150px; font-size: 20px;" th:text="${board.getViewCnt()}">
+                                <td style="width: 150px; font-size: 20px;">
+                                    <a th:href="@{'/boardDetail?bid='+${board.getBId()}}"
+                                       th:text="${board.getTitle()}"></a>
+                                </td>
+                                <td style="width: 150px; font-size: 20px;" th:text="${board.getWriteDate()}"></td>
+                                <td style="width: 150px; font-size: 20px;" th:text="${board.getViewCnt()}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -256,59 +222,35 @@
                     <br>
                     <br>
                     <br>
-                    <!--                    <form action="/freeList">-->
-                    <!--                        <div class="search-wrap clearfix">-->
-                    <!--                            <button type="submit" class="btn btn-primary search-btn" style="margin-right: 24%;">검색</button>-->
-                    <!--                            <input type="text" name="keyword" class="form-control search-input" value="${pc.paging.keyword}"-->
-                    <!--                                   style="width: 200px; ">-->
-                    <!--                            <select class="form-control" id="search-select" name="condition" style="width: 80px; margin-left: 54%">-->
-                    <!--                                <option value="title" ${pc.paging.condition = 'title' ? 'selected' : ''}>제목</option>-->
-                    <!--                                <option value="content" ${pc.paging.condition = 'content' ? 'selected' : ''}>내용</option>-->
-                    <!--                                <option value="writer" ${pc.paging.condition = 'writer' ? 'selected' : ''}>작성자</option>-->
-                    <!--                            </select>-->
-                    <!--                        </div>-->
-                    <!--                    </form>-->
 
                     <!-- 페이징 -->
-
                     <div class="paging">
-                        <form action="/freeList" name="pageForm">
-                            <div class="text-center clearfix" style="position: relative;">
-                                <ul class="pagination" id="pagination" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
-                                    <span th:if="${pc.prev}">
-                                        <li class="page-item"><a style="height: 50px;" class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${pc.beginPage - 1}"><p th:text="${pc.beginPage - 1}"></p></a></li>
-                                    </span>
-                                    <th:block th:each="num : ${#numbers.sequence(pc.beginPage, pc.endPage)}">
-                                        <li th:classappend="${pc.paging.pageNum == num} ? 'page-item active' : 'page-item'">
-                                            <a style="height: 50px;" class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${num}"><p th:text="${num}"></p></a>
-                                        </li>
-                                    </th:block>
-                                    <span th:if="${pc.next}">
-                                        <li class="page-item"><a style="height: 50px;" class="page-link" href="/freeList" th:href="'#' + 'data-pageNum=' + ${pc.endPage + 1}"><p th:text="${pc.endPage + 1}"></p></a></li>
-                                    </span>
-                                </ul>
-
-                                <!-- 페이지 관련 버튼을 클릭 시 같이 숨겨서 보낼 값 -->
-                                <input type="hidden" name="pageNum" value="${pc.paging.pageNum}">
-                                <input type="hidden" name="countPerPage" value="${pc.paging.countPerPage}">
-                                <input type="hidden" name="keyword" value="${pc.paging.keyword}">
-                                <input type="hidden" name="condition" value="${pc.paging.condition}">
-
+                        <form action="/board" name="pageForm">
+                            <div id="pagination" style="text-align: center">
+                                <!-- 맨 처음 페이지로 이동하는 버튼 -->
+                                <span th:if="${pageVO.startPage > 1}">
+                                    <a th:href="@{'/board?page=1'}" th:text="'처음&emsp;'"></a>
+                                </span>
+                                <!-- 이전 블록으로 이동하는 버튼 -->
+                                <span th:if="${pageVO.isPrev() == true}">
+                                    <a th:href="@{'/board?page='+${pageVO.startPage - 1}}" th:text="'이전'"></a>
+                                </span>
+                                <!-- 시퀀스 보여주는 값을 변경. -->
+                                <span th:each="pageNum : ${#numbers.sequence(pageVO.startPage, pageVO.endPage)}">
+                                    <a class="div2" th:href="@{'/board?page='+${pageNum}}"
+                                       th:text="|&emsp;${pageNum}&emsp;|"></a>
+                                </span>
+                                <!-- 다음 블록으로 이동하는 버튼 -->
+                                <span th:if="${pageVO.isNext() == true}">
+                                    <a th:href="@{'/board?page='+${pageVO.endPage + 1}}" th:text="'다음'"></a>
+                                </span>
+                                <!-- 맨 뒷 페이지로 이동하는 버튼 -->
+                                <span th:if="${pageVO.endPage < pageVO.totalPageCount}">
+                                    <a th:href="@{'/board?page='+${pageVO.totalPageCount}}" th:text="|&emsp;끝|"></a>
+                                </span>
                             </div>
                         </form>
                     </div>
-<!--                    &lt;!&ndash; Pagination &ndash;&gt;-->
-<!--                    <div class="oneMusic-pagination-area wow fadeInUp" data-wow-delay="300ms">-->
-<!--                        <ul class="pagination" style="text-align: center">-->
-<!--                            <li style="display: inline-block" class="page-item active"><a class="page-link"-->
-<!--                                                                                          href="#">01</a></li>-->
-<!--                            <li style="display: inline-block" class="page-item"><a class="page-link" href="#">02</a>-->
-<!--                            </li>-->
-<!--                            <li style="display: inline-block" class="page-item"><a class="page-link" href="#">03</a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-
                 </div>
             </section>
         </div>
@@ -328,6 +270,7 @@
                                                                             aria-hidden="true"></i> by
                         <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </a>
                     </p>
                 </div>
 
@@ -358,19 +301,29 @@
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
     <script>
-        function showCategories() {
-            var dropdown = document.getElementById("categoriesDropdown");
-            dropdown.style.display = "block";
-            dropdown.style.backgroundColor = 'black';
-            dropdown.style.fontSize = '10px';
-            dropdown.style.width = '30px';
-            dropdown.style.lineHeight = '30px';
+        const writeBoardButton = document.getElementById('writeBoardPage');
+        // var userInfo = window.sessionStorage.getItem('userInfo');
+
+        function writeBoardPage() {
+            console.log(window.sessionStorage.getItem('userInfo'));
+            if (window.sessionStorage.getItem('userInfo') == null) {
+                console.log("User Info: ", userInfo);
+                alert("로그인 후 이용할 수 있는 서비스입니다.");
+                return false;
+            } else {
+                return true;
+            }
         }
 
-        function hideCategories() {
-            var dropdown = document.getElementById("categoriesDropdown");
-            dropdown.style.display = "none";
+        writeBoardButton.addEventListener("click", writeBoardPage);
+
+        writeBoardButton.onclick = function () {
+            if (!writeBoardPage()) {
+                console.log("로그인 x")
+                history.back();
+            }
         }
     </script>
 

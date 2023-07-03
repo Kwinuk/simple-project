@@ -37,29 +37,20 @@
              b.bid = #{bId};
     </select>
 
-    <sql id="search">
-        <if test="condition == 'title'">
-            WHERE title LIKE CONCAT('%',#{keyword},'%')
-        </if>
-        <if test="condition == 'content'">
-            WHERE content LIKE CONCAT('%',#{keyword},'%')
-        </if>
-        <if test="condition == 'writer'">
-            WHERE writer LIKE CONCAT('%',#{keyword},'%')
-        </if>
-    </sql>
 
-    <!-- 토탈 -->
-    <select id="getTotal" resultType="int">
-        SELECT COUNT(*)
+    <!-- 게시물 총 개수 구하기 -->
+    <select id="getCount" resultType="int">
+        SELECT count(*) as listCnt
         FROM board
-        <include refid="search" />
     </select>
 
-    <select id="getFreeBoard" resultType="com.project.boardproject.api.board.model.BoardDTO">
-        select * from board
-        <include refid="search" />
-        order by bid desc
-        limit #{pageNum},  #{countPerPage}
+    <select id="getListPage" parameterType="com.project.boardproject.api.board.model.PaginationVO" resultType="com.project.boardproject.api.board.model.BoardDTO">
+        SELECT *
+        FROM board
+        ORDER BY bid DESC
+        LIMIT #{rowCount}
+            OFFSET #{offset}
     </select>
+
+
 </mapper>

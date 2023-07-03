@@ -2,8 +2,7 @@ package com.project.boardproject.api.board.service;
 
 import com.project.boardproject.api.board.mapper.BoardMapper;
 import com.project.boardproject.api.board.model.BoardDTO;
-import com.project.boardproject.api.board.model.Criteria;
-import com.project.boardproject.api.board.model.PageVO;
+import com.project.boardproject.api.board.model.PaginationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +25,18 @@ public class BoardService {
         return boardMapper.boardDetail(board);
     }
 
-    public int getTotal(PageVO pageVO) {
-        return boardMapper.getTotal(pageVO);
+    // 페이징을 위한 전체 데이터 개수 파악
+    public int getCount() {
+        return boardMapper.getCount();
     }
 
-    public List<BoardDTO> getFreeBoard(PageVO pageVO) {
-        return boardMapper.getFreeBoard(pageVO);
+
+    // 페이징을 위한 getListPage 메소드 추가
+    public List<BoardDTO> getListPage(final PaginationVO paginationVO) {
+        return boardMapper.getListPage(paginationVO);
     }
+
+
 
 
 }

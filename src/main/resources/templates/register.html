@@ -122,7 +122,7 @@
                     <h3>정보를 입력해주세요.</h3>
                     <!-- Login Form -->
                     <div class="login-form">
-                        <form action="/register" method="post" id="register">
+                        <form action="/register" method="post" id="register" name="register_form">
                             <div class="form-group">
                                 <label for="userId">아이디</label>
                                 <input type="text" class="form-control" name="userId" id="userId"
@@ -254,7 +254,7 @@
             idValid = false; // id 플래그 false
         } else {
             idTrue = false;
-            outputId.textContent = `옳바르게 입력하였습니다.`
+            outputId.textContent = `올바르게 입력하였습니다.`
             outputId.style.color = '#6667AB'
             idValid = true; // id 플래그 true
         }
@@ -267,7 +267,7 @@
             outputName.style.color = 'red';
             nameValid = false;
         } else {
-            outputName.textContent = `옳바르게 입력하셨습니다.`;
+            outputName.textContent = `올바르게 입력하셨습니다.`;
             outputName.style.color = '#6667AB';
             nameValid = true;
         }
@@ -280,7 +280,7 @@
             outputPw.style.color = 'red';
             pwValid = false;
         } else {
-            outputPw.textContent = `옳바르게 입력하셨습니다.`;
+            outputPw.textContent = `올바르게 입력하셨습니다.`;
             outputPw.style.color = '#6667AB';
             pwValid = true;
         }
@@ -288,7 +288,7 @@
 
     inputPw2.addEventListener('input', function () {
         if (inputPw.value == inputPw2.value) {
-            outputPw2.textContent = `옳바르게 입력하셨습니다.`
+            outputPw2.textContent = `올바르게 입력하셨습니다.`
             outputPw2.style.color = '#6667AB'
             inputPw.addEventListener('input', function () {
                 if (inputPw.value == "") {
@@ -339,25 +339,32 @@
 
         if (userId.value == "") {
             alert("아이디를 입력해주세요.");
+            userId.focus();
             return false
         }
         if (userPw.value == "") {
             alert("비밀번호 입력해주세요.");
+            userPw.focus();
             return false
         }
         if (userRePw.value == "") {
             alert("비밀번호를 재입력해주세요.");
+            userRePw.focus();
             return false
         }
         if (userName.value == "") {
             alert("이름을 입력해주세요.");
+            userName.focus();
             return false
         }
         if (nickName.value == "") {
             alert("닉네임을 입력해주세요.");
+            nickName.focus();
             return false
         }
+        document.register_form.onsubmit;
         alert("회원가입 성공");
+
 
     }
 

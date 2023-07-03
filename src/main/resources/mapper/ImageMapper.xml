@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.boardproject.api.image.mapper.ImageMapper">
+
+    <insert id="insertImage" parameterType="com.project.boardproject.api.image.model.ImageDTO">
+        INSERT INTO
+            image
+                (target_num, type_num, image_name)
+        VALUES
+        (#{targetNum}, #{typeNum}, #{imageName})
+    </insert>
+
+    <select id="selectOne" parameterType="com.project.boardproject.api.image.model.ImageDTO" resultType="com.project.boardproject.api.image.model.ImageDTO">
+        SELECT
+            (iid,target_num, type_num, image_name)
+        FROM
+            image
+        WHERE
+            #{typeNum} AND #{targetNUm}
+    </select>
+
+    <select id="selectAll" parameterType="com.project.boardproject.api.image.model.ImageDTO" resultType="com.project.boardproject.api.image.model.ImageDTO">
+        SELECT
+            (iid,target_num, type_num, image_name)
+        FROM
+            image
+        ORDER BY
+            #{iid} ASC
+    </select>
+
+    <delete id="deleteImage" parameterType="com.project.boardproject.api.image.model.ImageDTO">
+        DELETE
+        FROM
+            image
+        WHERE
+            target_num = #{targetNum}
+        AND
+            type_num > #{typeNum}
+    </delete>
+
+</mapper>

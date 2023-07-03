@@ -1,8 +1,7 @@
 package com.project.boardproject.api.user.controller;
 
-import com.project.boardproject.api.board.model.Criteria;
-import com.project.boardproject.api.board.model.PageCreate;
-import com.project.boardproject.api.board.model.PageVO;
+import com.project.boardproject.api.board.model.BoardDTO;
+import com.project.boardproject.api.board.model.PaginationVO;
 import com.project.boardproject.api.board.service.BoardService;
 import com.project.boardproject.api.user.model.UserDTO;
 import com.project.boardproject.api.user.service.UserService;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @SessionAttributes("userInfo")
@@ -26,16 +26,15 @@ public class UserController {
      * @return
      */
     @GetMapping("/index")
-    public String index(Model model, PageVO vo) {
-        model.addAttribute("boardList", boardService.boardList());
-        PageCreate pc = new PageCreate();
-        pc.setPaging(vo);
-        pc.setArticleTotalCount(boardService.getTotal(vo));
+    public String index(final Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
+        PaginationVO paginationVO = new PaginationVO(this.boardService.getCount(), page); // 모든 게시글 개수 구하기.
 
-        System.out.println(pc);
+        List<BoardDTO> list = this.boardService.getListPage(paginationVO);
 
-        model.addAttribute("freeList", boardService.getFreeBoard(vo));
-        model.addAttribute("pc", pc);
+        model.addAttribute("boardList", list);
+        model.addAttribute("page", page);
+        model.addAttribute("pageVO", paginationVO);
+
 
         return "index";
     }
@@ -61,18 +60,17 @@ public class UserController {
      * @return
      */
     @PostMapping("/register")
-    public String register(UserDTO user, Model model, PageVO vo) {
+    public String register(UserDTO user, final Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
         try {
             userService.register(user);
-//            model.addAttribute("boardList", boardService.boardList());
-            PageCreate pc = new PageCreate();
-            pc.setPaging(vo);
-            pc.setArticleTotalCount(boardService.getTotal(vo));
+            PaginationVO paginationVO = new PaginationVO(this.boardService.getCount(), page); // 모든 게시글 개수 구하기.
 
-            System.out.println(pc);
+            List<BoardDTO> list = this.boardService.getListPage(paginationVO);
 
-            model.addAttribute("freeList", boardService.getFreeBoard(vo));
-            model.addAttribute("pc", pc);
+            model.addAttribute("boardList", list);
+            model.addAttribute("page", page);
+            model.addAttribute("pageVO", paginationVO);
+
             return "index";
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,8 +83,17 @@ public class UserController {
      * @return
      */
     @GetMapping("/userlist")
-    public String getUsers(Model model) {
+    public String getUsers(final Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
+        PaginationVO paginationVO = new PaginationVO(this.boardService.getCount(), page); // 모든 게시글 개수 구하기.
+
+        List<BoardDTO> list = this.boardService.getListPage(paginationVO);
+
         model.addAttribute("users", userService.getUsers());
+
+        model.addAttribute("boardList", list);
+        model.addAttribute("page", page);
+        model.addAttribute("pageVO", paginationVO);
+
         return "index";
     }
 
@@ -96,39 +103,36 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserDTO user, HttpServletRequest request, Model model, PageVO vo) {
+    public String login(UserDTO user, HttpServletRequest request, final Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
         // 세션에 요청 값 저장
         HttpSession session = request.getSession();
         UserDTO userInfo = userService.login(user);
         // 세션에 로그인 정보 저장
         session.setAttribute("userInfo", userInfo);
-        PageCreate pc = new PageCreate();
-        pc.setPaging(vo);
-        pc.setArticleTotalCount(boardService.getTotal(vo));
 
-        System.out.println(pc);
+        PaginationVO paginationVO = new PaginationVO(this.boardService.getCount(), page); // 모든 게시글 개수 구하기.
 
-        model.addAttribute("freeList", boardService.getFreeBoard(vo));
-        model.addAttribute("pc", pc);
+        List<BoardDTO> list = this.boardService.getListPage(paginationVO);
 
+        model.addAttribute("boardList", list);
+        model.addAttribute("page", page);
+        model.addAttribute("pageVO", paginationVO);
 
-        System.out.println(session.getAttribute("userInfo"));
 
         return "index";
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, PageVO vo, Model model) {
-        HttpSession session = request.getSession();
-        PageCreate pc = new PageCreate();
-        pc.setPaging(vo);
-        pc.setArticleTotalCount(boardService.getTotal(vo));
-
-        System.out.println(pc);
-
-        model.addAttribute("freeList", boardService.getFreeBoard(vo));
-        model.addAttribute("pc", pc);
+    public String logout(HttpSession session, final Model model, @RequestParam(value = "page", defaultValue = "1") final int page) {
         session.invalidate();
+
+        PaginationVO paginationVO = new PaginationVO(this.boardService.getCount(), page); // 모든 게시글 개수 구하기.
+
+        List<BoardDTO> list = this.boardService.getListPage(paginationVO);
+
+        model.addAttribute("boardList", list);
+        model.addAttribute("page", page);
+        model.addAttribute("pageVO", paginationVO);
 
         return "index";
     }
