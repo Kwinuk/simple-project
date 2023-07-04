@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>One Music - Modern Music HTML5 Template</title>
+    <title>index</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico"/>
@@ -186,7 +186,7 @@
                             <div class="section-heading style-2">
                                 <h2>게시글 목록
                                 </h2>
-                                <a href="/writeBoardPage" id="writeBoardPage" onclick="writeBoardPage()">
+                                <a href="/insertBoardPage" id="insertBoardPage">
                                     <p style="text-align: right; margin-top: 20px; font-size: 20px; font-weight: bold">
                                         게시글작성</p>
                                 </a>
@@ -197,12 +197,12 @@
                     <div class="row">
                         <table style="text-align: center; margin-left: auto; margin-right: auto;">
                             <thead style="border: 1px solid black;">
-                            <tr>
-                                <th style="width: 200px; height: 100px; font-size: 20px;">글번호</th>
-                                <th style="width: 200px; height: 100px; font-size: 20px;">작성자</th>
-                                <th style="width: 200px; font-size: 20px;">제목</th>
-                                <th style="width: 200px; font-size: 20px;">작성일</th>
-                                <th style="width: 200px; font-size: 20px;">조회수</th>
+                            <tr style="background-color: black; color: white;">
+                                <th style="width: 200px; height: 70px; font-size: 18px;">글번호</th>
+                                <th style="width: 200px; font-size: 18px;">작성자</th>
+                                <th style="width: 200px; font-size: 18px;">제목</th>
+                                <th style="width: 200px; font-size: 18px;">작성일</th>
+                                <th style="width: 200px; font-size: 18px;">조회수</th>
                             </tr>
                             </thead>
                             <tbody style="border: 1px solid black;">
@@ -210,12 +210,11 @@
                                 <td style="width: 150px; font-size: 20px;" th:text="${board.getBId()}"></td>
                                 <td style="width: 150px; font-size: 20px;" th:text="${board.getWriter()}"></td>
                                 <td style="width: 150px; font-size: 20px;">
-                                    <a th:href="@{'/boardDetail?bid='+${board.getBId()}}"
+                                    <a th:href="@{'/boardDetail?bId='+${board.getBId()}}"
                                        th:text="${board.getTitle()}"></a>
                                 </td>
                                 <td style="width: 150px; font-size: 20px;" th:text="${board.getWriteDate()}"></td>
-                                <td style="width: 150px; font-size: 20px;" th:text="${board.getViewCnt()}"></td>
-                            </tr>
+                                <td style="width: 150px; font-size: 20px;" th:text="${viewCnt}"></td>
                             </tbody>
                         </table>
                     </div>
@@ -302,13 +301,16 @@
     <!-- Active js -->
     <script src="js/active.js"></script>
 
-    <script>
-        const writeBoardButton = document.getElementById('writeBoardPage');
-        // var userInfo = window.sessionStorage.getItem('userInfo');
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        const insertBoardPage = document.getElementById('insertBoardPage');
+
+        var userInfo = /*[[${session.userInfo}]]*/ null;
 
         function writeBoardPage() {
-            console.log(window.sessionStorage.getItem('userInfo'));
-            if (window.sessionStorage.getItem('userInfo') == null) {
+            console.log(userInfo);
+            if (userInfo == null) {
                 console.log("User Info: ", userInfo);
                 alert("로그인 후 이용할 수 있는 서비스입니다.");
                 return false;
@@ -317,16 +319,15 @@
             }
         }
 
-        writeBoardButton.addEventListener("click", writeBoardPage);
-
-        writeBoardButton.onclick = function () {
+        insertBoardPage.addEventListener("click", function (event) {
             if (!writeBoardPage()) {
-                console.log("로그인 x")
-                history.back();
+                event.preventDefault();
+                console.log("Log x");
+                location.href = "loginPage"
             }
-        }
+        });
+        /*]]>*/
     </script>
-
 </diveader>
 </body>
 

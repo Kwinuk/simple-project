@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    void register(UserDTO user);
+    Boolean register(UserDTO user);
 
     List<UserDTO> getUsers();
 

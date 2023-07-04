@@ -18,8 +18,9 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public void register(UserDTO user) {
+    public Boolean register(UserDTO user) {
         userMapper.register(user);
+        return true;
     }
 
     public List<UserDTO> getUsers() {

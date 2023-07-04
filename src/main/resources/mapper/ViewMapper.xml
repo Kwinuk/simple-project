@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.boardproject.api.view.mapper.ViewMapper">
+
+    <insert id="insertView" parameterType="com.project.boardproject.api.view.model.ViewDTO">
+        INSERT INTO
+            view
+            (bid)
+        VALUES
+            (#{bId})
+    </insert>
+
+    <select id="viewCnt" parameterType="com.project.boardproject.api.view.model.ViewDTO" resultType="com.project.boardproject.api.view.model.ViewDTO">
+        SELECT
+            view_cnt
+        FROM
+            view v
+        INNER JOIN
+            board b
+        ON
+            v.bId = b.bId
+        WHERE
+            v.bId = #{bId}
+
+    </select>
+
+    <select id="viewCntAll" parameterType="com.project.boardproject.api.view.model.ViewDTO" resultType="int">
+        SELECT
+            view_cnt
+        FROM
+            view
+    </select>
+
+    <update id="updateView" parameterType="com.project.boardproject.api.view.model.ViewDTO">
+        UPDATE
+            view
+        SET
+            view_cnt = ${viewCnt} + 1
+        WHERE
+            bid = ${bId}
+    </update>
+
+</mapper>

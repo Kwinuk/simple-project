@@ -13,16 +13,17 @@ public class BoardService {
     @Autowired
     BoardMapper boardMapper;
 
-    public void writeBoard(BoardDTO board) {
-        boardMapper.writeBoard(board);
+    public boolean insertBoard(BoardDTO board) {
+        boardMapper.insertBoard(board);
+        return true;
     }
 
     public List<BoardDTO> boardList() {
         return boardMapper.boardList();
     }
 
-    public BoardDTO boardDetail(BoardDTO board) {
-        return boardMapper.boardDetail(board);
+    public BoardDTO boardDetail(int bid) {
+        return boardMapper.boardDetail(bid);
     }
 
     // 페이징을 위한 전체 데이터 개수 파악
@@ -36,7 +37,13 @@ public class BoardService {
         return boardMapper.getListPage(paginationVO);
     }
 
+    public boolean updateBoard(BoardDTO boardDTO) {
+        return boardMapper.updateBoard(boardDTO);
+    }
 
+    public int findBid() {
+        return boardMapper.findBid();
+    }
 
 
 }

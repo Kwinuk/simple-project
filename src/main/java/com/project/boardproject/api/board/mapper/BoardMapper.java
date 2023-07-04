@@ -9,13 +9,17 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-    void writeBoard(BoardDTO board);
+    boolean insertBoard(BoardDTO board);
 
     List<BoardDTO> boardList();
 
-    BoardDTO boardDetail(BoardDTO board);
+    BoardDTO boardDetail(int bid);
 
     int getCount();
 
     List<BoardDTO> getListPage(PaginationVO paginationVO);
+
+    boolean updateBoard(BoardDTO boardDTO);
+
+    int findBid();
 }

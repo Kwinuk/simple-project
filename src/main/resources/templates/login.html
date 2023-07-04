@@ -114,6 +114,7 @@
                     </nav>
                 </div>
             </div>
+
         </div>
     </div>
 </header>
@@ -137,6 +138,7 @@
                     <!-- Login Form -->
                     <div class="login-form">
                         <form action="/login" method="post">
+                            <input type="hidden" id="urlBackLogin" name="urlBack" value=""/>
                             <div class="form-group">
                                 <label for="userId">아이디</label>
                                 <input type="text" class="form-control" name="userId" id="userId"
@@ -155,37 +157,6 @@
         </div>
     </div>
 </section>
-<!-- ##### Login Area End ##### -->
-
-<!--&lt;!&ndash; ##### Footer Area Start ##### &ndash;&gt;-->
-<!--<footer class="footer-area">-->
-<!--    <div class="container">-->
-<!--        <div class="row d-flex flex-wrap align-items-center">-->
-<!--            <div class="col-12 col-md-6">-->
-<!--                <a href="#"><img src="img/core-img/logo.png" alt=""></a>-->
-<!--                <p class="copywrite-text"><a href="#">-->
-<!--                    &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
-<!--                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>-->
-<!--                    All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by-->
-<!--                    <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
-<!--                    &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-12 col-md-6">-->
-<!--                <div class="footer-nav">-->
-<!--                    <ul>-->
-<!--                        <li><a href="#">Home</a></li>-->
-<!--                        <li><a href="#">Albums</a></li>-->
-<!--                        <li><a href="#">Events</a></li>-->
-<!--                        <li><a href="#">News</a></li>-->
-<!--                        <li><a href="#">Contact</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</footer>-->
-<!--&lt;!&ndash; ##### Footer Area Start ##### &ndash;&gt;-->
 
 <!-- ##### All Javascript Script ##### -->
 <!-- jQuery-2.2.4 js -->
@@ -198,6 +169,15 @@
 <script src="js/plugins/plugins.js"></script>
 <!-- Active js -->
 <script src="js/active.js"></script>
+<script>
+    $(document).ready(function getURL() {
+        var urlBack = document.referrer;
+        $('#urlBackLogin').attr('value', urlBack);
+    });
+
+</script>
+
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>One Music - Modern Music HTML5 Template</title>
+    <title>register</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -19,6 +19,38 @@
 
 </head>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+    .button-container {
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .button {
+        background: var(--button-bg-color);
+        color: var(--button-color);
+        margin: 0;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        display: inline-block;
+        width: auto;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+        transition: 0.5s;
+    }
+
+    .button-register {
+        /* Additional styles specific to the "button-register" class */
+    }
+
+    /* Define the custom CSS variables */
+    :root {
+        --button-color: #ffffff;
+        --button-bg-color: #0d6efd;
+        --button-hover-bg-color: #025ce2;
+    }
+
     @font-face {
         font-family: 'NanumSquareNeo-Variable';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
@@ -123,30 +155,32 @@
                     <!-- Login Form -->
                     <div class="login-form">
                         <form action="/register" method="post" id="register" name="register_form">
+                            <input type="hidden" id="urlBack" name="urlBack" value=""/>
                             <div class="form-group">
                                 <label for="userId">아이디</label>
                                 <input type="text" class="form-control" name="userId" id="userId"
-                                       aria-describedby="emailHelp" placeholder="Enter ID">
-                                <input style="color: white; border-radius: 7px; float: right;" type="button"
-                                       id="idCheckBtn" onclick="checkId()" class="button button-register" value="중복확인">
+                                       aria-describedby="emailHelp" placeholder="Enter ID" required>
+                                <div class="button-container">
+                                    <input type="button" id="idCheckBtn" onclick="checkId()" class="button button-register" style="margin-top: 8px; font-size: 13px; width: 100%; box-sizing: border-box;" value="중복확인">
+                                </div>
                             </div>
                             <p class="checkre" align="left" id="outputId">영문자로 시작하는 영문자 또는 숫자 5~12자 </p>
                             <div class="form-group">
                                 <label for="userPw">비밀번호</label>
                                 <input type="password" class="form-control" name="userPw" id="userPw"
-                                       placeholder="Password">
+                                       placeholder="Password" required>
                             </div>
                             <p class="checkre" align="left" id="outputPw">8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합</p>
                             <div class="form-group">
                                 <label for="userRePw">비밀번호 재입력</label>
                                 <input type="password" class="form-control" name="userRePw" id="userRePw"
-                                       placeholder="Password">
+                                       placeholder="Password" required>
                             </div>
                             <p class="checkre" align="left" id="outputRePw"></p>
                             <div class="form-group">
                                 <label for="userName">이름</label>
                                 <input type="text" class="form-control" name="userName" id="userName"
-                                       placeholder="Enter Name">
+                                       placeholder="Enter Name" required>
                             </div>
                             <p class="checkre" align="left" id="outputName">
                                 이름을 입력해주세요.
@@ -154,7 +188,7 @@
                             <div class="form-group">
                                 <label for="nickName">닉네임</label>
                                 <input type="text" class="form-control" name="nickName" id="nickName"
-                                       placeholder="Enter Nick Name">
+                                       placeholder="Enter Nick Name" required>
                             </div>
                             <p class="checkre" align="left" id="outputNickName">
                                 닉네임을 입력해주세요.
@@ -162,12 +196,12 @@
                             <div class="form-group">
                                 <label for="address">주소</label>
                                 <input type="text" class="form-control" name="address" id="address"
-                                       placeholder="address">
+                                       placeholder="address" required>
                             </div>
                             <div class="form-group">
                                 <label for="phoneNum">휴대번호</label>
                                 <input type="text" class="form-control" name="phoneNum" id="phoneNum"
-                                       placeholder="phone">
+                                       placeholder="phone" required>
                             </div>
                             <button type="submit" class="btn oneMusic-btn mt-30" onclick="registerButton()">회원가입</button>
                         </form>
@@ -220,7 +254,12 @@
 <script src="js/plugins/plugins.js"></script>
 <!-- Active js -->
 <script src="js/active.js"></script>
-
+<script type="text/javascript">
+    $(document).ready(function getURL() {
+        var urlBack = document.referrer;
+        $('#urlBack').attr('value', urlBack);
+    });
+</script>
 <!-- 정규표현식 검사 -->
 <script type="text/javascript">
     const form = document.querySelector('#register')

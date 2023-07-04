@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>alert</title>
+</head>
+<link rel="stylesheet" href="css/alert.css" type="text/css">
+<body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("스크립트 진입!")
+        var locationValue = /*[[${location}]]*/ '';
+        var msgValue = /*[[${msg}]]*/ '';
+        var DTOValue = /*[[${DTO}]]*/ '';
+
+        console.log(locationValue);
+        console.log(msgValue);
+        swal({
+            text: msgValue,
+            button: "확인"
+        })
+            .then(function () {
+                if (locationValue.indexOf('index') !== -1 || locationValue.indexOf('login') !== -1 || locationValue.indexOf('register') !== -1) {
+                    console.log('1');
+                    location.href = locationValue;
+                } else if (DTOValue != null) {
+                    console.log('2');
+                    location.href = locationValue;
+                } else if (locationValue === '') {
+                    window.close();
+                } else {
+                    console.log('3');
+                    location.href = locationValue;
+                }
+            })
+    });
+    /*]]>*/
+
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+</body>
+
+</html>

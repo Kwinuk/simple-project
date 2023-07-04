@@ -2,7 +2,7 @@
 
 <mapper namespace="com.project.boardproject.api.board.mapper.BoardMapper">
 
-    <insert id="writeBoard" parameterType="com.project.boardproject.api.board.model.BoardDTO">
+    <insert id="insertBoard" parameterType="com.project.boardproject.api.board.model.BoardDTO">
         INSERT INTO
         board
         (uid, title, content, writer, write_date)
@@ -10,33 +10,25 @@
         (#{uId}, #{title}, #{content}, #{writer}, NOW())
     </insert>
 
-    <!--suppress SqlResolve -->
     <select id="boardList" resultType="com.project.boardproject.api.board.model.BoardDTO">
-<!--                SELECT-->
-<!--                    title, content, writer, write_date, view_cnt-->
-<!--                FROM-->
-<!--                    (SELECT-->
-<!--                         title, content, writer, write_date, view_cnt, ROW_NUMBER() OVER (ORDER BY bid ASC) AS rownum-->
-<!--                    FROM-->
-<!--                        board-->
-<!--                    WHERE-->
-<!--                        rownum <= #{pageNum} * #{amount}-->
-<!--                ) AS subquery-->
-<!--                WHERE-->
-<!--                    rownum > (#{pageNum}-1) * #{amount}-->
-
             SELECT * FROM BOARD
     </select>
 
     <select id="boardDetail" parameterType="int" resultType="com.project.boardproject.api.board.model.BoardDTO">
         SELECT
-            bid, title, content, writer, view_cnt, write_date
+            bid, title, content, writer, write_date
         FROM
             board b INNER JOIN user u ON b.uid = u.uid
         WHERE
              b.bid = #{bId};
     </select>
 
+    <select id="findBid" resultType="int">
+        SELECT
+            MAX(bid) AS bid
+        FROM
+            board
+    </select>
 
     <!-- 게시물 총 개수 구하기 -->
     <select id="getCount" resultType="int">
@@ -52,5 +44,13 @@
             OFFSET #{offset}
     </select>
 
+    <update id="updateBoard" parameterType="com.project.boardproject.api.board.model.BoardDTO">
+        UPDATE
+        BOARD
+        SET
+            title = ${title}, content = ${content}
+        WHERE
+            bid = ${bId}
+    </update>
 
 </mapper>
