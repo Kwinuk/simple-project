@@ -1,346 +1,344 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-  <!-- Title -->
-  <title>updateBoard</title>
+    <!-- Title -->
+    <title>updateBoard</title>
 
-  <!-- Favicon -->
-  <link rel="icon" href="img/core-img/favicon.ico"/>
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico"/>
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css"/>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css"/>
 
 </head>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
-  :root {
-    --button-color: #ffffff;
-    --button-bg-color: #0d6efd;
-    --button-hover-bg-color: #025ce2;
-  }
+    :root {
+        --button-color: #ffffff;
+        --button-bg-color: #0d6efd;
+        --button-hover-bg-color: #025ce2;
+    }
 
-  button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
 
-    background: var(--button-bg-color);
-    color: var(--button-color);
+        background: var(--button-bg-color);
+        color: var(--button-color);
 
-    margin: 0;
-    padding: 0.5rem 1rem;
+        margin: 0;
+        padding: 0.5rem 1rem;
 
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    text-align: center;
-    text-decoration: none;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        text-align: center;
+        text-decoration: none;
 
-    border: none;
-    border-radius: 4px;
+        border: none;
+        border-radius: 4px;
 
-    display: inline-block;
-    width: auto;
+        display: inline-block;
+        width: auto;
 
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
-    cursor: pointer;
+        cursor: pointer;
 
-    transition: 0.5s;
-  }
+        transition: 0.5s;
+    }
 
-  @font-face {
-    font-family: 'NanumSquareNeo-Variable';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
+    @font-face {
+        font-family: 'NanumSquareNeo-Variable';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
 
-  p {
-    font-family: 'NanumSquareNeo-Variable', sans-serif;
-  }
+    p {
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
 
-  h2 {
-    font-family: 'NanumSquareNeo-Variable', sans-serif;
-  }
+    h2 {
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
 
-  a {
-    font-family: 'NanumSquareNeo-Variable', sans-serif;
-  }
+    a {
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
 
-  #menu {
-    width: 100%;
-    height: 85px;
-  }
+    #menu {
+        width: 100%;
+        height: 85px;
+    }
 
-  #menu ul li {
-    background-color: lightslategray;
-    list-style: none;
-    line-height: 30px;
-    text-align: center;
-    margin: 0 auto;
-  }
+    #menu ul li {
+        background-color: lightslategray;
+        list-style: none;
+        line-height: 30px;
+        text-align: center;
+        margin: 0 auto;
+    }
 
-  #menu li {
-    display: inline-block;
-    height: 85px;
-  }
+    #menu li {
+        display: inline-block;
+        height: 85px;
+    }
 
-  #menu ul {
-    float: left;
-    text-align: center;
-  }
+    #menu ul {
+        float: left;
+        text-align: center;
+    }
 </style>
 <body>
 <!-- Preloader -->
 <div class="preloader d-flex align-items-center justify-content-center">
-  <div class="lds-ellipsis">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 
 <!-- ##### Header Area Start ##### -->
 <diveader class="header-area">
-  <!-- Navbar Area -->
-  <div id="sticky-wrapper1" class="sticky-wrapper" style="height: 85px;">
-    <div class="oneMusic-main-menu">
-      <div class="classy-nav-container breakpoint-off">
-        <div class="container">
-          <!-- Menu -->
-          <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+    <!-- Navbar Area -->
+    <div id="sticky-wrapper1" class="sticky-wrapper" style="height: 85px;">
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
-            <!-- Nav brand -->
-            <a href="/index" class="nav-brand"><img src="img/core-img/xcurenetlogo.png" alt=""></a>
+                        <!-- Nav brand -->
+                        <a href="/index" class="nav-brand"><img src="img/core-img/xcurenetlogo.png" alt=""></a>
 
-            <!-- Navbar Toggler -->
-            <div class="classy-navbar-toggler">
-              <span class="navbarToggler"><span></span><span></span><span></span></span>
-            </div>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
 
-            <!-- Menu -->
-            <div class="classy-menu">
+                        <!-- Menu -->
+                        <div class="classy-menu">
 
-              <!-- Close Button -->
-              <div class="classycloseIcon">
-                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-              </div>
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
 
-              <!-- Nav Start -->
-              <div class="classynav">
-                <!-- Login/Register & Cart Button -->
-                <th:block th:if="${session.userInfo != null}">
-                  <div class="login-register-cart-button d-flex align-items-center"
-                       style="margin-top: 40px;">
-                    <div class="login-register-btn">
-                      <a href="/myPage" style="transform: translateY(7%);"><p
-                              style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                        마이페이지</p></a>
-                      <a href="/logout" style="transform: translateY(7%); margin-right: 4px"><p
-                              style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                        로그아웃</p></a>
-                    </div>
-                  </div>
-                </th:block>
-                <th:block th:if="${session.userInfo == null}">
-                  <div class="login-register-cart-button d-flex align-items-center"
-                       style="margin-top: 40px;">
-                    <div class="login-register-btn" style="margin-right: 10px;">
-                      <a href="/loginPage"><p
-                              style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                        로그인</p></a>
-                    </div>
-                    <div class="login-register-btn">
-                      <a href="/registerPage"><p
-                              style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                        회원가입</p></a>
-                    </div>
-                  </div>
-                </th:block>
-              </div>
-              <!-- Nav End -->
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="sticky-wrapper" class="sticky-wrapper" style="height: 61px;">
-    <div class="oneMusic-main-menu">
-      <div class="classy-nav-container breakpoint-off">
-        <div class="container">
-          <!-- Menu -->
-          <nav class="classy-navbar justify-content-between" id="oneMusicNav"
-               style="background-color: black; line-height: 90px; text-align: center; margin: 0 auto;">
-            <!-- Nav brand -->
-            <ul id="menu">
-              <li style="margin-right: 30px;"><a href="/popular"><p
-                      style="color: white; font-size: 20px;">인기글</p></a></li>
-              <li style="margin-right: 30px;"><a href="/newest"><p style="color: white; font-size: 20px;">
-                최신글</p></a></li>
-<!--              <li onmouseover="showCategories();" onmouseout="hideCategories();"-->
-<!--                  style="margin-right: 30px;">-->
-<!--                <p style="color: white; font-size: 20px;">카테고리</p>-->
-<!--                <ul id="categoriesDropdown" style="display: none;">-->
-<!--                  <li><a href="/category1"><p style="color: white; font-size: 20px">Category 1</p></a>-->
-<!--                  </li>-->
-<!--                  <li><a href="/category2"><p style="color: white; font-size: 20px">Category 2</p></a>-->
-<!--                  </li>-->
-<!--                  <li><a href="/category3"><p style="color: white; font-size: 20px">Category 3</p></a>-->
-<!--                  </li>-->
-<!--                </ul>-->
-<!--              </li>-->
-            </ul>
-
-            <!-- Navbar Toggler -->
-            <div class="classy-navbar-toggler">
-              <span class="navbarToggler"><span></span><span></span><span></span></span>
-            </div>
-
-            <!-- Menu -->
-            <div class="classy-menu">
-
-              <!-- Close Button -->
-              <div class="classycloseIcon">
-                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-              </div>
-              <!-- Nav End -->
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-  </header>
-  <!-- ##### Header Area End ##### -->
-
-  <!-- ##### Buy Now Area Start ##### -->
-  <div style="background-color: #f5f9fa; overflow:hidden;
-		height:auto;">
-    <div style="width: 1110px; justify-content: center;  margin: 0 auto; height: 1000px;">
-      <section class="oneMusic-buy-now-area has-fluid bg-gray section-padding-100" style=" padding-top: 60px">
-        <div class="container-fluid" style="height: 510px;">
-          <div class="row" style="margin-bottom: -30px;">
-            <div class="col-12" style="height: 200px; text-align: center">
-              <h2>게시글 상세 페이지
-              </h2>
-              <a href="/index">
-                <p style="text-align: right; margin-top: 20px; font-size: 20px; font-weight: bold">
-                  뒤로 가기</p>
-              </a>
-              <br>
-              <div>
-                <div class="row" style="text-align: center;">
-                  <div class="row1" style="width: 10%; margin-left: 15px">
-                    <div style="padding-bottom: 45px; text-align: left; height: 90px;">
-                      <p style="font-weight: bold; font-size: 25px">제목</p>
-                    </div>
-                    <div style="padding-bottom: 495px; text-align: left;">
-                      <p style="font-weight: bold; font-size: 25px">내용</p>
-                    </div>
-                  </div>
-                  <div class="row2" style="width: 90%; margin-left: -15px;">
-                    <div class="col-lg-12 col-md-12" style="height: 100px;" >
-                      <div style="text-align: center;">
-                        <input type="text" name="title" style="height: 50px; width: 890px;" th:value="${board.getTitle()}" required>
-                      </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12" style="height: 100px;">
-                      <div style="text-align: center;">
-                        <textarea name="content" id="editor" th:value="${board.getContent()}" required></textarea>
-                        <button type="submit" style="margin-top: 30px; width: 70px; font-size: 18px;">
-                          작성
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <!-- Login/Register & Cart Button -->
+                                <th:block th:if="${session.userInfo != null}">
+                                    <div class="login-register-cart-button d-flex align-items-center"
+                                         style="margin-top: 40px;">
+                                        <div class="login-register-btn">
+                                            <a href="" style="transform: translateY(7%);"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;" th:value="${session.userName}">
+                                            </p></a>
+                                            <a href="/exit" style="transform: translateY(7%); margin-right: 4px"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
+                                                로그아웃</p></a>
+                                            <!--                                            <a href="/myPage"><p-->
+                                            <!--                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;"-->
+                                            <!--                                                    th:text="${session.userInfo + ' 님'}"></p></a>-->
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${session.userInfo == null}">
+                                    <div class="login-register-cart-button d-flex align-items-center"
+                                         style="margin-top: 40px;">
+                                        <div class="login-register-btn" style="margin-right: 10px;">
+                                            <a href="/loginPage"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
+                                                로그인</p></a>
+                                        </div>
+                                        <div class="login-register-btn">
+                                            <a href="/registerPage"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
+                                                회원가입</p></a>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
     </div>
-  </div>
-  <!-- ##### Buy Now Area End ##### -->
+    <div id="sticky-wrapper" class="sticky-wrapper" style="height: 61px;">
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav"
+                         style="background-color: black; line-height: 90px; text-align: center; margin: 0 auto;">
+                        <!-- Nav brand -->
+                        <ul id="menu">
+                            <li style="margin-right: 30px;"><a href="/popularBoard"><p
+                                    style="color: white; font-size: 20px;">인기글</p></a></li>
+                            <li style="margin-right: 30px;"><a href="/newestBoard"><p style="color: white; font-size: 20px;">
+                                최신글</p></a></li>
+                            </li>
+                        </ul>
 
-  <!-- ##### Footer Area Start ##### -->
-  <footer class="footer-area">
-    <div class="container">
-      <div class="row d-flex flex-wrap align-items-center">
-        <div class="col-12 col-md-6">
-          <a href="#"><img src="img/core-img/logo.png" alt=""></a>
-          <p class="copywrite-text"><a href="#">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                                                aria-hidden="true"></i> by
-            <a href="https://colorlib.com" target="_blank">Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
-        </div>
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
 
-        <div class="col-12 col-md-6">
-          <div class="footer-nav">
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Albums</a></li>
-              <li><a href="#">Events</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </footer>
-  <!-- ##### Footer Area Start ##### -->
+    </header>
+    <!-- ##### Header Area End ##### -->
 
-  <!-- ##### All Javascript Script ##### -->
-  <!-- jQuery-2.2.4 js -->
-  <script src="js/jquery/jquery-2.2.4.min.js"></script>
-  <!-- Popper js -->
-  <script src="js/bootstrap/popper.min.js"></script>
-  <!-- Bootstrap js -->
-  <script src="js/bootstrap/bootstrap.min.js"></script>
-  <!-- All Plugins js -->
-  <script src="js/plugins/plugins.js"></script>
-  <!-- Active js -->
-  <script src="js/active.js"></script>
-<!--  <script>-->
-<!--    function showCategories() {-->
-<!--      var dropdown = document.getElementById("categoriesDropdown");-->
-<!--      dropdown.style.display = "block";-->
-<!--      dropdown.style.backgroundColor = 'black';-->
-<!--      dropdown.style.fontSize = '10px';-->
-<!--      dropdown.style.width = '30px';-->
-<!--      dropdown.style.lineHeight = '30px';-->
-<!--    }-->
+    <!-- ##### Buy Now Area Start ##### -->
+    <div style="background-color: #f5f9fa; overflow:hidden;
+		height:auto;">
+        <div style="width: 1110px; justify-content: center;  margin: 0 auto; height: 1000px;">
+            <section class="oneMusic-buy-now-area has-fluid bg-gray section-padding-100" style=" padding-top: 60px">
+                <div class="container-fluid" style="height: 510px;">
+                    <div class="row" style="margin-bottom: -30px;">
+                        <div class="col-12" style="height: 200px; text-align: center">
+                            <h2>게시글 상세 페이지
+                            </h2>
+                            <a href="/index">
+                                <p style="text-align: right; margin-top: 20px; font-size: 20px; font-weight: bold">
+                                    뒤로 가기</p>
+                            </a>
+                            <br>
+                            <div>
+                                <form action="/updateBoard" method="POST" enctype="multipart/form-data">
+                                    <div class="row" style="text-align: center;">
+                                        <div class="row1" style="width: 10%; margin-left: 15px">
+                                            <div style="padding-bottom: 45px; text-align: left; height: 90px;">
+                                                <p style="font-weight: bold; font-size: 25px">제목</p>
+                                            </div>
+                                            <div style="padding-bottom: 495px; text-align: left;">
+                                                <p style="font-weight: bold; font-size: 25px">내용</p>
+                                            </div>
+                                        </div>
+                                        <div class="row2" style="width: 90%; margin-left: -15px;">
+                                            <div class="col-lg-12 col-md-12" style="height: 100px;">
+                                                <div style="text-align: center;">
+                                                    <input type="text" name="title" style="height: 50px; width: 890px;"
+                                                           th:value="${board.getTitle()}" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12" style="height: 100px;">
+                                                <div style="text-align: center;">
+                                                    <textarea name="content" id="editor"
+                                                              value="${board.getContent()}" required></textarea>
+                                                    <input type="hidden" name="bId" th:value="${board.getBId()}">
+                                                    <button type="submit"
+                                                            style="margin-top: 30px; width: 70px; font-size: 18px;">
+                                                        작성
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- ##### Buy Now Area End ##### -->
 
-<!--    function hideCategories() {-->
-<!--      var dropdown = document.getElementById("categoriesDropdown");-->
-<!--      dropdown.style.display = "none";-->
-<!--    }-->
-<!--  </script>-->
-  <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-  <script type="text/javascript"
-          src="https://ckeditor.com/docs/vendors/4.20.2/ckeditor/plugins/autogrow/plugin.js?t=N227"></script>
-  <script>
-    $(function () {
-      CKEDITOR
-              .replace(
-                      'editor',
-                      {
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-12 col-md-6">
+                    <a href="#"><img src="img/core-img/logo.png" alt=""></a>
+                    <p class="copywrite-text"><a href="#">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                            aria-hidden="true"></i> by
+                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="footer-nav">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Albums</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <!--  <script>-->
+    <!--    function showCategories() {-->
+    <!--      var dropdown = document.getElementById("categoriesDropdown");-->
+    <!--      dropdown.style.display = "block";-->
+    <!--      dropdown.style.backgroundColor = 'black';-->
+    <!--      dropdown.style.fontSize = '10px';-->
+    <!--      dropdown.style.width = '30px';-->
+    <!--      dropdown.style.lineHeight = '30px';-->
+    <!--    }-->
+
+    <!--    function hideCategories() {-->
+    <!--      var dropdown = document.getElementById("categoriesDropdown");-->
+    <!--      dropdown.style.display = "none";-->
+    <!--    }-->
+    <!--  </script>-->
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <script type="text/javascript"
+            src="https://ckeditor.com/docs/vendors/4.20.2/ckeditor/plugins/autogrow/plugin.js?t=N227"></script>
+    <script>
+        $(function () {
+            CKEDITOR
+                .replace(
+                    'editor',
+                    {
                         extraPlugins: 'autogrow',
                         autoGrow_minHeight: 250,
                         autoGrow_maxHeight: 1000,
@@ -349,9 +347,9 @@
                         removePlugins: 'resize',
                         removeButtons: 'PasteFromWord',
                         filebrowserUploadUrl: '/fileupload'
-                      });
-    });
-  </script>
+                    });
+        });
+    </script>
 
 </diveader>
 </body>

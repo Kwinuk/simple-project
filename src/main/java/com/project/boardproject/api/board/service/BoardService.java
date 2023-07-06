@@ -37,12 +37,20 @@ public class BoardService {
         return boardMapper.getListPage(paginationVO);
     }
 
-    public boolean updateBoard(BoardDTO boardDTO) {
-        return boardMapper.updateBoard(boardDTO);
+    public boolean updateBoard(int bId) {
+        return boardMapper.updateBoard(bId);
     }
 
     public int findBid() {
         return boardMapper.findBid();
+    }
+
+    public boolean updateBoardState (int bId) {
+        return boardMapper.updateBoardState(bId);
+    }
+
+    public List<BoardDTO> popularBoard(final PaginationVO paginationVO) {
+        return boardMapper.popularBoard(paginationVO);
     }
 
 

@@ -6,6 +6,7 @@ import lombok.Data;
 public class BoardDTO {
     private int bId;
     private int uId;
+    private int isUse;
     private String title;
     private String content;
     private String writer;

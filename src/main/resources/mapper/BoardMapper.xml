@@ -16,7 +16,7 @@
 
     <select id="boardDetail" parameterType="int" resultType="com.project.boardproject.api.board.model.BoardDTO">
         SELECT
-            bid, title, content, writer, write_date
+            b.bid, b.uid, b.title, b.content, b.writer, b.write_date
         FROM
             board b INNER JOIN user u ON b.uid = u.uid
         WHERE
@@ -35,16 +35,20 @@
         SELECT count(*) as listCnt
         FROM board
     </select>
-
+    
     <select id="getListPage" parameterType="com.project.boardproject.api.board.model.PaginationVO" resultType="com.project.boardproject.api.board.model.BoardDTO">
-        SELECT *
-        FROM board
+        SELECT
+            b.bid, b.writer, b.title, b.write_date, v.view_cnt, b.is_use
+        FROM
+            board b JOIN view v
+        ON
+            b.bid = v.bid
         ORDER BY bid DESC
         LIMIT #{rowCount}
             OFFSET #{offset}
     </select>
 
-    <update id="updateBoard" parameterType="com.project.boardproject.api.board.model.BoardDTO">
+    <update id="updateBoard" parameterType="int">
         UPDATE
         BOARD
         SET
@@ -52,5 +56,26 @@
         WHERE
             bid = ${bId}
     </update>
+
+    <update id="updateBoardState" parameterType="int">
+        UPDATE
+        BOARD
+        SET
+            is_use = 2
+        WHERE
+            bid = ${bId}
+    </update>
+    
+    <select id="popularBoard" resultType="com.project.boardproject.api.board.model.BoardDTO">
+        SELECT
+            b.bid, b.writer, b.title, b.write_date, v.view_cnt, b.is_use
+        FROM
+            board b JOIN view v
+                         ON
+                             b.bid = v.bid
+        ORDER BY view_cnt DESC
+        LIMIT #{rowCount}
+            OFFSET #{offset}
+    </select>
 
 </mapper>

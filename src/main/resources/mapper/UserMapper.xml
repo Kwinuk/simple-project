@@ -15,7 +15,7 @@
     </select>
 
     <select id="login" parameterType="String" resultType="com.project.boardproject.api.user.model.UserDTO">
-        SELECT * FROM USER WHERE user_id = #{userId} AND user_pw = #{userPw}
+        SELECT * FROM USER WHERE user_id = #{userId}
     </select>
 
     <select id="checkId" parameterType="String" resultType="com.project.boardproject.api.user.model.UserDTO">

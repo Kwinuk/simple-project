@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @Mapper
 public interface ImageMapper {
 
-    ArrayList<ImageDTO> selectAll(ImageDTO imageDTO);
+    ArrayList<ImageDTO> selectAll();
     ImageDTO selectOne(ImageDTO imageDTO);
     boolean insertImage(ImageDTO imageDTO);
     boolean deleteImage(ImageDTO imageDTO);

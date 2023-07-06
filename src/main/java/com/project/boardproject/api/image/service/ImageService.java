@@ -12,8 +12,8 @@ public class ImageService {
     @Autowired
     ImageMapper imageMapper;
 
-    public ArrayList<ImageDTO> selectAll(ImageDTO imageDTO) {
-        return imageMapper.selectAll(imageDTO);
+    public ArrayList<ImageDTO> selectAll() {
+        return imageMapper.selectAll();
     }
 
     public ImageDTO selectOne(ImageDTO imageDTO) {

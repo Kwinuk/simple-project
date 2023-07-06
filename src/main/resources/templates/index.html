@@ -106,12 +106,15 @@
                                     <div class="login-register-cart-button d-flex align-items-center"
                                          style="margin-top: 40px;">
                                         <div class="login-register-btn">
-                                            <a href="/myPage" style="transform: translateY(7%);"><p
-                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                                                마이페이지</p></a>
-                                            <a href="/logout" style="transform: translateY(7%); margin-right: 4px"><p
+                                            <a href="" style="transform: translateY(7%);"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;" th:value="${session.userName}">
+                                            </p></a>
+                                            <a href="/exit" style="transform: translateY(7%); margin-right: 4px"><p
                                                     style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
                                                 로그아웃</p></a>
+                                            <!--                                            <a href="/myPage"><p-->
+                                            <!--                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;"-->
+                                            <!--                                                    th:text="${session.userInfo + ' 님'}"></p></a>-->
                                         </div>
                                     </div>
                                 </th:block>
@@ -147,9 +150,9 @@
                          style="background-color: black; line-height: 90px; text-align: center; margin: 0 auto;">
                         <!-- Nav brand -->
                         <ul id="menu">
-                            <li style="margin-right: 30px;"><a href="/popular"><p
+                            <li style="margin-right: 30px;"><a href="/popularBoard"><p
                                     style="color: white; font-size: 20px;">인기글</p></a></li>
-                            <li style="margin-right: 30px;"><a href="/newest"><p style="color: white; font-size: 20px;">
+                            <li style="margin-right: 30px;"><a href="/newestBoard"><p style="color: white; font-size: 20px;">
                                 최신글</p></a></li>
                             </li>
                         </ul>
@@ -177,8 +180,8 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Buy Now Area Start ##### -->
-    <div style="background-color: #f5f9fa;">
-        <div style="width: 1110px; justify-content: center;  margin: 0px auto;">
+    <div style="background-color: #f5f9fa; height: 1000px;">
+        <div style="width: 1110px; justify-content: center;  margin: 0px auto; ">
             <section class="oneMusic-buy-now-area has-fluid bg-gray section-padding-100">
                 <div class="container-fluid">
                     <div class="row" style="margin-bottom: -90px;">
@@ -207,14 +210,17 @@
                             </thead>
                             <tbody style="border: 1px solid black;">
                             <tr th:each="board : ${boardList}" style="border: 1px solid black;">
-                                <td style="width: 150px; font-size: 20px;" th:text="${board.getBId()}"></td>
-                                <td style="width: 150px; font-size: 20px;" th:text="${board.getWriter()}"></td>
-                                <td style="width: 150px; font-size: 20px;">
-                                    <a th:href="@{'/boardDetail?bId='+${board.getBId()}}"
-                                       th:text="${board.getTitle()}"></a>
-                                </td>
-                                <td style="width: 150px; font-size: 20px;" th:text="${board.getWriteDate()}"></td>
-                                <td style="width: 150px; font-size: 20px;" th:text="${viewCnt}"></td>
+                                <th:block th:if="${board.getIsUse() == 1}">
+                                    <td style="width: 150px; font-size: 20px;" th:text="${board.getBId()}"></td>
+                                    <td style="width: 150px; font-size: 20px;" th:text="${board.getWriter()}"></td>
+                                    <td style="width: 150px; font-size: 20px;">
+                                        <a th:href="@{'/boardDetail?bId=' + ${board.getBId()} + '&viewCnt=' + ${board.getViewCnt()}}"
+                                           th:text="${board.getTitle()}"></a>
+                                    </td>
+                                    <td style="width: 150px; font-size: 20px;" th:text="${board.getWriteDate()}"></td>
+                                    <td style="width: 150px; font-size: 20px;" th:text="${board.getViewCnt()}"></td>
+                                </th:block>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

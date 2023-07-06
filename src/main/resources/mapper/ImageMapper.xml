@@ -19,13 +19,12 @@
             #{typeNum} AND #{targetNUm}
     </select>
 
-    <select id="selectAll" parameterType="com.project.boardproject.api.image.model.ImageDTO" resultType="com.project.boardproject.api.image.model.ImageDTO">
+    <select id="selectAll" resultType="com.project.boardproject.api.image.model.ImageDTO">
         SELECT
-            (iid,target_num, type_num, image_name)
+            (image_name)
         FROM
             image
-        ORDER BY
-            #{iid} ASC
+        ORDER BY image_num ASC
     </select>
 
     <delete id="deleteImage" parameterType="com.project.boardproject.api.image.model.ImageDTO">

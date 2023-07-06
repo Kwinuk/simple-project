@@ -142,15 +142,15 @@
                                     <div class="login-register-cart-button d-flex align-items-center"
                                          style="margin-top: 40px;">
                                         <div class="login-register-btn">
-                                            <a href="/myPage" style="transform: translateY(7%);"><p
-                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
-                                                마이페이지</p></a>
-                                            <a href="/logout" style="transform: translateY(7%); margin-right: 4px"><p
+                                            <a href="" style="transform: translateY(7%);"><p
+                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;" th:value="${session.userName}">
+                                            </p></a>
+                                            <a href="/exit" style="transform: translateY(7%); margin-right: 4px"><p
                                                     style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;">
                                                 로그아웃</p></a>
-<!--                                            <a href="/myPage"><p-->
-<!--                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;"-->
-<!--                                                    th:text="${session.userInfo + ' 님'}"></p></a>-->
+                                            <!--                                            <a href="/myPage"><p-->
+                                            <!--                                                    style="color : black; align-content: center; font-size: 20px; font-weight : bold; margin-top: 10px;"-->
+                                            <!--                                                    th:text="${session.userInfo + ' 님'}"></p></a>-->
                                         </div>
                                     </div>
                                 </th:block>
@@ -186,21 +186,10 @@
                          style="background-color: black; line-height: 90px; text-align: center; margin: 0 auto;">
                         <!-- Nav brand -->
                         <ul id="menu">
-                            <li style="margin-right: 30px;"><a href="/popular"><p
+                            <li style="margin-right: 30px;"><a href="/popularBoard"><p
                                     style="color: white; font-size: 20px;">인기글</p></a></li>
-                            <li style="margin-right: 30px;"><a href="/newest"><p style="color: white; font-size: 20px;">
+                            <li style="margin-right: 30px;"><a href="/newestBoard"><p style="color: white; font-size: 20px;">
                                 최신글</p></a></li>
-                            <li onmouseover="showCategories();" onmouseout="hideCategories();"
-                                style="margin-right: 30px;">
-                                <p style="color: white; font-size: 20px;">카테고리</p>
-                                <ul id="categoriesDropdown" style="display: none;">
-                                    <li><a href="/category1"><p style="color: white; font-size: 20px">Category 1</p></a>
-                                    </li>
-                                    <li><a href="/category2"><p style="color: white; font-size: 20px">Category 2</p></a>
-                                    </li>
-                                    <li><a href="/category3"><p style="color: white; font-size: 20px">Category 3</p></a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
 

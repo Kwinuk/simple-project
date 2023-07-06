@@ -19,7 +19,11 @@ public interface BoardMapper {
 
     List<BoardDTO> getListPage(PaginationVO paginationVO);
 
-    boolean updateBoard(BoardDTO boardDTO);
+    boolean updateBoard(int bId);
 
     int findBid();
+
+    boolean updateBoardState(int bId);
+
+    List<BoardDTO> popularBoard(PaginationVO paginationVO);
 }

@@ -24,7 +24,7 @@
 
     </select>
 
-    <select id="viewCntAll" parameterType="com.project.boardproject.api.view.model.ViewDTO" resultType="int">
+    <select id="viewCntAll" parameterType="com.project.boardproject.api.view.model.ViewDTO" resultType="com.project.boardproject.api.view.model.ViewDTO">
         SELECT
             view_cnt
         FROM

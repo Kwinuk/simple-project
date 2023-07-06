@@ -14,6 +14,6 @@ public interface ViewMapper {
 
     boolean updateView(ViewDTO bId);
 
-    List<Integer> viewCntAll();
+    List<ViewDTO> viewCntAll();
 
 }

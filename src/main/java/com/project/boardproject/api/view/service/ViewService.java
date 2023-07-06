@@ -24,7 +24,7 @@ public class ViewService {
         return viewMapper.updateView(bId);
     }
 
-    public List<Integer> viewCntAll() {
+    public List<ViewDTO> viewCntAll() {
         return viewMapper.viewCntAll();
     }
 }

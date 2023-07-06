@@ -36,7 +36,7 @@ public class CkeditorFileUploadController {
         OutputStream out = null;
 
         String projectPath = session.getServletContext().getRealPath("/"); // 파일 경로 ".../webapp/" 까지
-//        projectPath = projectPath.substring(0, projectPath.indexOf(".metadata"));
+        projectPath = projectPath.substring(0, projectPath.indexOf("AppData"));
         System.out.println("projectPath: " + projectPath);
         System.out.println();
 
@@ -63,8 +63,8 @@ public class CkeditorFileUploadController {
                     // 2. 나중에 사용할 실제 이미지를 프로젝트 내부 경로에 저장
 
                     // 파일이 실제로 저장되는 경로
-                    String uploadPath1 = request.getServletContext().getRealPath("/img");
-                    String uploadPath2 = projectPath + "resource/static/img/board-img";
+                    String uploadPath1 = request.getServletContext().getRealPath("/img/board-img");
+                    String uploadPath2 = projectPath + "IdeaProjects/boardProject/src/main/resources/static/img/board-img";
                     System.out.println("uploadPath1 for Dir: " + uploadPath1);
                     System.out.println("uploadPath2 for Dir: " + uploadPath2);
 
@@ -105,7 +105,7 @@ public class CkeditorFileUploadController {
                     response.setContentType("text/html");
 
                     // 파일이 연결되는 Url 주소 설정
-                    String fileUrl = request.getContextPath() + "/img/" + fileName;
+                    String fileUrl = request.getContextPath() + "/img/board-img/" + fileName;
                     System.out.println("fileUrl " + uploadPath1);
 
                     // 생성된 jason 객체를 이용해 파일 업로드 + 이름 + 주소를 CkEditor에 전송
